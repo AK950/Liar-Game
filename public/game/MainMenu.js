@@ -1,7 +1,7 @@
 
 BasicGame.MainMenu = function (game) {
 
-	this.music = null;
+	//this.music = null;
 	
 	this.hostGameButton = null;
 	this.joinGameButton = null;
@@ -31,8 +31,8 @@ BasicGame.MainMenu.prototype = {
 		//	Here all we're doing is playing some music and adding a picture and button
 		//	Naturally I expect you to do something significantly better :)
 
-		this.music = this.add.audio('titleMusic');
-		this.music.play();
+		//this.music = this.add.audio('titleMusic');
+		//this.music.play();
 
 		this.upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
 		this.downKey = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
@@ -106,13 +106,15 @@ BasicGame.MainMenu.prototype = {
 		this.arrowGroup.setAll('visible',false);
 		var arrows = this.arrowGroup.children;
 		var length = arrows.length;
-		arrows[(++this.currentArrow % length)].visible = true;
+		this.currentArrow++;
+		this.currentArrow %= length;
+		arrows[this.currentArrow].visible = true;
 	},
 
 	hostGame: function (pointer) {
 
 		//	Ok, the Play Button has been clicked or touched, so let's stop the music (otherwise it'll carry on playing)
-		this.music.stop();
+		//this.music.stop();
 		//	And let player host a game room
 		this.state.start('HostRoom');
 
@@ -121,7 +123,7 @@ BasicGame.MainMenu.prototype = {
 	joinGame: function (pointer) {
 
 		//	Ok, the Play Button has been clicked or touched, so let's stop the music (otherwise it'll carry on playing)
-		this.music.stop();
+		//this.music.stop();
 
 		//Initialize rooms
 		socket.emit('initializeRooms',null);
@@ -131,12 +133,12 @@ BasicGame.MainMenu.prototype = {
 	},
 
 	howToPlay: function(pointer){
-		this.music.stop();
+		//this.music.stop();
 		this.state.start('HowToPlay');
 	},
 
 	keyboardControl: function(pointer){
-		this.music.stop();
+		//this.music.stop();
 		this.state.start('KeyboardControl');
 	},
 

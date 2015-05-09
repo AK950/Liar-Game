@@ -155,6 +155,9 @@ function onStart() {
         if(e.keyCode == 13)
             joinRoom()});
     $("#submit").click(function() {sentMessage()});
+    $("#messageInput").focus(function () {
+        keycontrlgame = false;
+    });
     $("#messageInput").keyup(function(e) {
         if(e.keyCode == 13 && !(keycontrlgame))
         {
